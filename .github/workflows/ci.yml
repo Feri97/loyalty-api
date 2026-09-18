@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  quality:
+    name: Quality checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build PHP image
+        run: docker compose build php
+
+      - name: Install dependencies
+        run: docker compose run --rm php composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Validate Composer configuration
+        run: docker compose run --rm php composer validate --strict
+
+      - name: Lint Symfony YAML configuration
+        run: docker compose run --rm php php bin/console lint:yaml config
+
+      - name: Lint Symfony service container
+        run: docker compose run --rm php php bin/console lint:container
+
+      - name: Run PHPStan
+        run: docker compose run --rm php vendor/bin/phpstan analyse
+
+      - name: Check coding standards
+        run: docker compose run --rm php vendor/bin/php-cs-fixer fix --dry-run --diff
+
+      - name: Start application stack
+        run: docker compose up -d
+
+      - name: Show container status
+        run: docker compose ps
+
+      - name: Check health endpoint
+        run: |
+          curl --fail \
+            --retry 10 \
+            --retry-delay 2 \
+            --retry-connrefused \
+            http://localhost:8080/health
+
+      - name: Show Docker logs on failure
+        if: failure()
+        run: docker compose logs
+
+      - name: Stop application stack
+        if: always()
+        run: docker compose down -v
