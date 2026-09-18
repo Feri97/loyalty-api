@@ -41,12 +41,14 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "7.4.*"
+            "require": "7.4.*",
+            "docker": false
         }
     },
     "scripts": {
         "auto-scripts": {
-            "cache:clear": "symfony-cmd"
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
         "post-install-cmd": [
             "@auto-scripts"
@@ -54,5 +56,10 @@
         "post-update-cmd": [
             "@auto-scripts"
         ]
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.95",
+        "phpstan/phpstan": "^2.2",
+        "phpstan/phpstan-symfony": "^2.0"
     }
 }

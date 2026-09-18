@@ -2,10 +2,22 @@
 /var/
 /.env.local
 /.env.*.local
+/.env.local.php
 /.phpunit.result.cache
 /.phpunit.cache/
 /.phpunit.cache
 /.idea/
 /.vscode/
+/public/bundles/
+/config/secrets/prod/prod.decrypt.private.php
 .DS_Store
 composer.phar
+
+###> friendsofphp/php-cs-fixer ###
+/.php-cs-fixer.php
+/.php-cs-fixer.cache
+###< friendsofphp/php-cs-fixer ###
+
+###> phpstan/phpstan ###
+phpstan.neon
+###< phpstan/phpstan ###
