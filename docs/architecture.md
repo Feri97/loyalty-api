@@ -8,6 +8,27 @@ The Loyalty API owns the core loyalty domain, including customers, loyalty accou
 
 A separate Notification Service will be added later as an independently deployable microservice.
 
+## Current local runtime
+
+The current Docker Compose environment contains three containers:
+
+```text
+Browser / API client
+        |
+        v
+   Nginx :8080
+        |
+        v
+   PHP-FPM :9000
+        |
+        v
+   MongoDB :27017
+```
+
+Nginx and PHP-FPM are separate containers because they have separate responsibilities and can be built, configured and scaled independently.
+
+Docker Compose places the containers on a shared private network. Service names act as internal DNS names.
+
 ## Planned components
 
 ### Loyalty API
