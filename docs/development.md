@@ -113,10 +113,15 @@ Each pull request should explain:
 
 ## Quality gates
 
-The project will gradually enforce:
+Currently enforced locally and in GitHub Actions:
 
-- PHPUnit
+- Composer validation
+- Symfony YAML linting
+- Symfony service-container linting
 - PHPStan
 - PHP-CS-Fixer
-- Symfony linting
-- automated GitHub Actions checks
+- Docker Compose configuration validation and application health smoke testing
+
+Planned as feature development begins:
+
+- PHPUnit

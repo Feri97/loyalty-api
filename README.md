@@ -30,8 +30,8 @@ See [docs/architecture.md](docs/architecture.md) for the current architecture an
 
 Local development is Docker-based so the application and its infrastructure can be started reproducibly without relying on host-installed PHP extensions or databases.
 
-Setup instructions will be maintained in [docs/development.md](docs/development.md).
+Setup instructions are maintained in [docs/development.md](docs/development.md).
 
 ## Status
 
-Project bootstrap in progress.
+Project bootstrap complete. The next feature is the Customer API.
